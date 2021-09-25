@@ -1,0 +1,25 @@
+.hidden {
+  display: none;
+}
+.wrapper {
+  display: flex;
+}
+
+.col-1 {
+  height: 300px;
+  width: 20%;
+  border: 2px solid salmon;
+}
+
+.col-2 {
+  width: 50%;
+  border: 2px solid salmon;
+}
+.box {
+  height: 40%;
+  width: 100%;
+  border: 2px solid salmon;
+}
+extarea {
+  width: 100%;
+}
