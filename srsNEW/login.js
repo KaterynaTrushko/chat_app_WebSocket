@@ -13,7 +13,8 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-submit.addEventListener('click', function () {
+submit.addEventListener('click', function (e) {
+  e.preventDefault();
   let user = userName.value;
   userName.value = '';
   validName(user);
@@ -22,8 +23,11 @@ submit.addEventListener('click', function () {
 })
 
 function validName(name) {
+  
   if (!name) {
-    alert('Input a users name');
+    alert('Input a users name!')
+        
+
   } else {
     localStorage.setItem('name', name);
     document.querySelector('.logIn').classList.add('hidden');

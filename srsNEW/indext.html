@@ -10,33 +10,32 @@
 </head>
 
 <body>
-
-  <section>
+  <div class="container">
     <section>
-      <div class="logIn">
-        <input type="text" name="login" id="userName" placeholder="User Name">
-        <button class="btn" id="submit">Login</button>
+      <section>
+        <div class="logIn">
+          <input type="text" name="login" id="userName" placeholder="User Name">
+          <button class="btn" id="submit">Login</button>
+        </div>
+      </section>
+    </section>
+    <section class="chat">
+      <div class="chat-box">
+        <div class="wrap">
+        <div class="user-box"></div>
+        <div><button class="logout">Logout</button></div>
+      </div>
+      <div class="wrap">
+          <div id="messages" class="message-box"></div>
+          <form name="publish" class="form">
+            <input type="text" name="message" class="input">
+            <input type="submit" value="Отправить" class="btn">
+            <label><input type="checkbox" class="checkbox" id="connection"> reconnect </label>
+          </form>
+        </div>
       </div>
     </section>
-  </section>
-  <section class="chat">
- 
-        <div class="chat-box">
-          <!-- форма сообщений -->
-          <div class="user-box">List of users</div>
-          <div class="col-2">
-          <div id="messages" class="message-box"></div>
-            <form name="publish" class="form">
-              <input type="text" name="message" class="input">
-              <input type="submit" value="Отправить" class="input">
-              <label><input type="checkbox" id="connection"> reconnect </label>
-              <button class="logout">Logout</button>
-            </form>
-           
-          </div>
-        </div>
-     
-  </section>
+  </div>
   <!-- type="module" -->
   <!-- <script src="login.js"></script> -->
   <script type="module" src="app.js"></script>

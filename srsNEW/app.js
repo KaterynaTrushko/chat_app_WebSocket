@@ -18,7 +18,7 @@ socket.onclose = function (event) {
 function print(user, message) {
   let messageElem = document.createElement('div');
   messageElem.classList.add('user-mes');
-  messageElem.innerHTML = `<span>${user} </span><span> ${message}</span>`;
+  messageElem.innerHTML = `<span class="name">${user} </span><div class="mess"> ${message}</div>`;
   document.getElementById('messages').append(messageElem);
 };
 
@@ -51,15 +51,17 @@ document.forms.publish.onsubmit = function () {
 
   let text = this.message.value;
   if (!text) {
-    alert("Input message")
+    console.log("Input message");
   } else {
     let myMessegeObj = new messegeObj(user, text);
     let myMessageStr = JSON.stringify(myMessegeObj);
     socket.send(myMessageStr);
     this.message.value = '';
     return false;
+    
   }
-};
+
+  };
 
 
 let nameBox = [];
@@ -86,7 +88,7 @@ socket.onmessage = function (event) {
    } else {
      printUser(getMessage.payload.username);
    }
-  
+   window.location.reload()
 };
 
 document.addEventListener("DOMContentLoaded", function () {
