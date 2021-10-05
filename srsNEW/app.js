@@ -46,19 +46,6 @@ class messegeObj {
   }
 }
 
-function unique(arr) {
-  let result = [];
-
-  for (let str of arr) {
-    if (!result.includes(str)) {
-      result.push(str);
-    }
-  }
-
-  return result;
-}
-
-
 
 document.forms.publish.onsubmit = function () {
 
@@ -83,7 +70,9 @@ socket.onmessage = function (event) {
   let getMessage = JSON.parse(event.data);
   if (JSON.parse(localStorage.getItem('date'))) {
     messedesDate = JSON.parse(localStorage.getItem('date'));
+    nameBox = messedesDate.map(m => m.payload.username);
   }
+  
   messedesDate.push(getMessage);
   localStorage.setItem('date', JSON.stringify(messedesDate));
 
@@ -91,17 +80,13 @@ socket.onmessage = function (event) {
   messageElem.textContent = `${getMessage.payload.username}  ${getMessage.payload.message}`;
   document.getElementById('messages').append(messageElem);
 
-
-
-  if (nameBox.includes(getMessage.payload.username)) {
-    return;
-  } else {
-    let div = document.createElement('div');
-    div.classList.add('user-name');
-    div.textContent = getMessage.payload.username;
-    document.querySelector('.user-box').append(div);
-  }
-
+  let uniqueNames = [...new Set(nameBox)];
+   if(uniqueNames.includes(getMessage.payload.username)){
+     return;
+   } else {
+     printUser(getMessage.payload.username);
+   }
+  
 };
 
 document.addEventListener("DOMContentLoaded", function () {
@@ -111,10 +96,26 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     for (let i = 0; i < messedesDate.length; i++) {
       print(messedesDate[i].payload.username, messedesDate[i].payload.message);
+      console.log(messedesDate[i]);
    }
   }
   connection.checked = true;
 
-  
+  const names = messedesDate.map(m => m.payload.username);
+  let uniqueNames = [...new Set(names)];
 
+  uniqueNames.forEach(element => {
+    printUser(element);
+  });
+
+  console.log(names);
+  console.log(uniqueNames);
+  
 });
+
+let logout = document.querySelector('.logout');
+
+logout.onclick = function(){
+  localStorage.clear();
+  location.reload();
+}
