@@ -1,3 +1,5 @@
+import './style.css'
+
 import * as obj from './login.js'
 
 let user = localStorage.getItem('name');
@@ -20,6 +22,7 @@ function print(user, message) {
   messageElem.classList.add('user-mes');
   messageElem.innerHTML = `<span class="name">${user} </span><div class="mess"> ${message}</div>`;
   document.getElementById('messages').append(messageElem);
+
 };
 
 
@@ -81,14 +84,14 @@ socket.onmessage = function (event) {
   let messageElem = document.createElement('div');
   messageElem.textContent = `${getMessage.payload.username}  ${getMessage.payload.message}`;
   document.getElementById('messages').append(messageElem);
-
+  location.reload();
   let uniqueNames = [...new Set(nameBox)];
    if(uniqueNames.includes(getMessage.payload.username)){
      return;
    } else {
      printUser(getMessage.payload.username);
    }
-   window.location.reload()
+  
 };
 
 document.addEventListener("DOMContentLoaded", function () {
